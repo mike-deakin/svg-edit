@@ -1,0 +1,26 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="cm/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="cm/lib/codemirror.css">
+  <script src="cm/mode/xml/xml.js"></script>
+  <script src="cm/mode/javascript/javascript.js"></script>
+  <script src="cm/mode/css/css.js"></script>
+  <script src="cm/mode/htmlmixed/htmlmixed.js"></script>
+</head>
+<body>
+  <textarea id="code-area"></textarea>
+  <canvas id="svg-result-canvas"></canvas>
+
+  <script>
+    /*
+     *  This script generates the whole workspace, startnig with the CodeMirror
+     *  text editor, then the svg canvas.
+     */
+    let codeEditor = CodeMirror.fromTextArea(document.getElementById("code-area"), {
+      mode: "htmlmixed",
+      lineNumbers: true
+    })
+  </script>
+</body>
+</html>
