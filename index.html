@@ -9,7 +9,8 @@
   <script src="cm/mode/htmlmixed/htmlmixed.js"></script>
 </head>
 <body>
-  <textarea id="code-area"></textarea>
+  <textarea id="code-area">&lt;svg&gt;&#10;&lt;/svg&gt;</textarea>
+  <button id="btn-render" style="width: 60px; height: 40px" onclick="render(codeEditor)">Render</button>
   <canvas id="svg-result-canvas"></canvas>
 
   <script>
@@ -21,6 +22,25 @@
       mode: "htmlmixed",
       lineNumbers: true
     })
+
+    let canvas = document.getElementById('svg-result-canvas')
+    let context = canvas.getContext('2d')
+
+    let DOMURL = window.URL || window.webkitURL || window
+
+    let render = function( editor ){
+      let data = editor.getValue()
+      let img = new Image()
+      let svg = new Blob([data], {type: 'image/svg+xml;charset=utf-8'})
+      let url = DOMURL.createObjectURL(svg)
+
+      img.onload = function() {
+        context.drawImage(img, 0, 0)
+        DOMURL.revokeObjectURL(url)
+      }
+      img.src = url
+    }
+
   </script>
 </body>
 </html>
